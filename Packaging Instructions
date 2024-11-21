@@ -1,0 +1,17 @@
+From the root "Project" folder run the following 2 commands back to back in a terminal:
+    mkdir -p asiste_tareas_lambda_utils_layer/python/lib/python3.11/site-packages/
+    pip install -r requirements.txt -t asiste_tareas_lambda_utils_layer/python/lib/python3.11/site-packages/
+
+This will install the dependencies in requirements.txt into a directory to be packaged
+
+Afterwards:
+    cp -r Library asiste_tareas_lambda_utils_layer/python/lib/python3.11/site-packages/
+
+This will copy the actual Utilities Library into the folder alongside the dependencies
+
+And lastly run the following:
+    cd asiste_tareas_lambda_utils_layer
+    zip -r asiste_tareas_lambda_utils_layer.zip python/ (If using Mac OS or Linux)
+    Compress-Archive -Path .\* -DestinationPath asiste_tareas_lambda_utils_layer.zip
+
+Which will finalize the packaging of the layer
