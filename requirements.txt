@@ -1,2 +1,10 @@
-pymysql
-requests
+pymysql~=1.1.1
+requests~=2.32.0
+Flask~=3.1.0
+certifi~=2022.9.24
+cryptography~=38.0.3
+h2~=4.1.0
+urllib3~=1.26.12
+pyOpenSSL~=22.1.0
+idna~=3.4
+charset-normalizer~=2.1.1

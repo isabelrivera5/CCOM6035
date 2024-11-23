@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Tareas - Educación Especial</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="public/styless.css">
+ 
+    
+</head>
+<style>body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura total de la ventana */
+    margin: 0;
+    background-image: url('public/fondo.png');
+    background-color:transparent; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 120vh;
+    font-family: Arial, sans-serif;
+    padding: 0;
+ }
+</style>
+
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.classList.add('hidden'));
+        document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function registerUser() {
+        alert("Registro exitoso");
+        showSection('task-options');
+    }
+
+    function addTask() {
+        alert("Tarea agregada exitosamente");
+        showSection('task-options');
+    }
+
+    function searchTask() {
+        alert("Tareas encontradas");
+        showSection('task-results');
+    }
+
+    function deleteTask() {
+        const confirmDelete = confirm("¿Está seguro de que desea eliminar esta tarea?");
+        if (confirmDelete) {
+            alert("Tarea eliminada");
+            showSection('task-search');
+        }
+    }
+</script>
+<body>
+
+<header>
+ </header>
+
+<!-- Login/Register Section -->
+<section id="login-register" class="form-section section">
+    <h2>Acceda para Ingresar o Registrarse</h2>
+    <div class="form-group">
+        <button onclick="showSection('login')">Ingresar</button>
+        <button onclick="showSection('register')">Registrarse</button>
+    </div>
+</section>
+
+<!-- Login Section -->
+<section id="login" class="form-section section hidden">
+    <h2>Ingresar</h2>
+    <div class="form-group">
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" required>
+    </div>
+    <div class="form-group">
+        <label for="contraseña">Contraseña</label>
+        <input type="password" id="contraseña" required>
+    </div>
+    <div class="action-buttons">
+        <button onclick="showSection('forgot-user')">Olvidó Usuario</button>
+        <button onclick="showSection('forgot-password')">Olvidó Contraseña</button>
+    </div>
+    <button onclick="window.location.href='src/Principal.html'">Ingresar</button>
+ </section>
+
+<!-- Register Section -->
+<section id="register" class="form-section section hidden">
+    <h2>Registro</h2>
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+    </div>
+    <div class="form-group">
+        <label for="reg-password">Contraseña</label>
+        <input type="password" id="reg-password" required>
+    <button onclick="registerUser();showSection('login')">Registrar</button>
+ 
+</section>
+
+</div>
+
+
+<section>
+    <footer>
+        <p>&copy; 2024 Asiste Tarea Educación Especial</p>
+    </footer>
+
+</section>
+
+
+</body>
+</html>

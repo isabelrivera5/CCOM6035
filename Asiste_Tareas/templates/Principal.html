@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title> Bienvenidos al Portal de Tareas para estudiantes de Educación Especial</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+        <link rel="stylesheet" href="public/styless.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <title>Asistente de la tarea</title>
+    
+    </head>
+
+
+    <style>
+    
+
+
+
+    /* Estilos globales */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura total de la ventana */
+    margin: 0;
+    background-image: url('{{ url_for('static', filename='images/fondo.png') }}');
+    background-color:transparent; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 120vh;
+    font-family: Arial, sans-serif;
+    padding: 0;
+ }
+
+
+
+/* Estilo del formulario */
+
+
+/* Estilo del título */
+h3 {
+    text-align: center; /* Centrar el título */
+    margin-bottom: 20px;
+    color: #1b1b1d; /* Violeta */
+}
+
+
+
+
+.container {
+    width: 50%;
+    max-width: 600px;
+    margin: 20px;
+    margin-top: 500px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    height: 100vh;
+    top: 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Sombra elegante */
+
+}
+
+
+
+
+
+h1, h2 {
+    color: #5a4e96; /* Violeta */
+}
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+select, input[type="file"], button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    background-color: #68a063; /* Verde */
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de texto */
+    font-weight: bold; /* Texto más llamativo */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Suavidad en las transiciones */
+
+
+}
+button:hover {
+    background-color: #3c6139; /* Verde más oscuro */
+    transform: translateY(-2px); /* Efecto de levantamiento */}
+ 
+button:active {
+    transform: translateY(0); /* Regresa al lugar al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce la sombra al presionar */
+  }
+
+
+footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #777;
+}
+
+
+header {
+    background-color: transparent; /* Verde */
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+.form-section {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.hidden {
+    display: none;
+}
+.action-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+ 
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  #searchButton {
+    padding: 10px 16px;
+    background-color: #68a063; /* Verde moderno */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  #searchButton:hover {
+    background-color: #45a049; /* Verde más oscuro */
+    transform: translateY(-2px); /* Efecto de levantamiento */
+  }
+  
+  #searchButton:active {
+    transform: translateY(0); /* Regresa al lugar al hacer clic */
+  }
+  
+  #searchButton:hover {
+    background-color: #0056b3;
+  }
+
+  select, input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+    </style>
+
+
+<body>
+<div class="container">
+
+
+
+<!-- Principa Section -->
+<section id="principal" class="form-section section">
+    <h2>Bienvenidos al Portal de Tareas para estudiantes de Educación Especial</h2>
+    <h3>¿Qué desea hacer hoy? </h3>
+    <div class="form-group">
+        <button onclick="window.location.href='/Buscador.html'">Buscar Tarea</button>
+        <button onclick="window.location.href='/Agregar.html'">Agregrar Tarea</button>
+    </div>
+</section>
+
+
+<div class="search-container">
+    <input type="text" id="tagInput" placeholder="Ingrese una palabra clave..." />
+    <button id="searchButton">🔍 Búsqueda Avanzada</button>
+  </div>
+
+
+
+<footer>
+    <p>&copy; 2024 Asiste Tarea Educación Especial</p>
+</footer>
+
+</div>
+
+</body>
+</html>
