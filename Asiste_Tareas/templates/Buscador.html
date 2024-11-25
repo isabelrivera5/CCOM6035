@@ -1,81 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
- 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title> Bienvenidos al Portal de Tareas para estudiantes de Educación Especial</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
-    <link rel="stylesheet" href="styless.css">
-    <title>Asistente de la tarea</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title> Bienvenidos al Portal de Tareas para estudiantes de Educación Especial</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styless.css') }}">
+        <title>Asistente de la tarea</title>
 
-</head>
-<body>
-<div class="container">
-<form id="formulario" action="backend.php" method="POST">
+    </head>
+    <body>
+    <div class="container">
+        <form id="formulario" action="backend.php" method="POST">
 
-    <header>
-        <h2>Portal para buscar tareas</h1>
-        <h3>Seleccione la descripción de la tarea que desea buscar:</h3>
-       </header>
-     <!-- Subject Selection -->
-    <section>
-        <label for="materia">Materia</label>
-        <select id="materia">
-            <option>Matemáticas</option>
-            <option>Ciencias</option>
-            <option>Historia</option>
-            <option>Educación Física</option>
-            <option>Música</option>
-        </select>
-    </section>
+        <header>
+            <h2>Portal para buscar tareas</h1>
+            <h3>Seleccione la descripción de la tarea que desea buscar:</h3>
+           </header>
+         <!-- Subject Selection -->
+        <section>
+            <label for="materia">Materia</label>
+            <select id="materia">
+                <option>Matemáticas</option>
+                <option>Ciencias</option>
+                <option>Historia</option>
+                <option>Educación Física</option>
+                <option>Música</option>
+            </select>
+        </section>
 
-    <!-- Grade Selection -->
-    <section>
-        <label for="grado">Grado</label>
-        <select id="grado">
-            <option>Kindergarten</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-    </section>
+        <!-- Grade Selection -->
+        <section>
+            <label for="grado">Grado</label>
+            <select id="grado">
+                <option>Kindergarten</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </section>
 
-    <!-- Skill Level -->
-    <section>
-        <label for="destreza">Destreza (Indicador)</label>
-        <select id="destreza">
-            <option>Indicador 1</option>
-            <option>Indicador 2</option>
-            <option>Indicador 3</option>
-            <option>Indicador 4</option>
-        </select>
-    </section>
+        <!-- Skill Level -->
+        <section>
+            <label for="destreza">Destreza (Indicador)</label>
+            <select id="destreza">
+                <option>Indicador 1</option>
+                <option>Indicador 2</option>
+                <option>Indicador 3</option>
+                <option>Indicador 4</option>
+            </select>
+        </section>
 
-    <!-- Student Level -->
-    <section>
-        <label for="nivel">Nivel del Estudiante</label>
-        <select id="nivel">
-            <option>Nivel 1</option>
-            <option>Nivel 2</option>
-            <option>Nivel 3</option>
-            <option>Nivel 4</option>
-        </select>
-    </section>
+        <!-- Student Level -->
+        <section>
+            <label for="nivel">Nivel del Estudiante</label>
+            <select id="nivel">
+                <option>Nivel 1</option>
+                <option>Nivel 2</option>
+                <option>Nivel 3</option>
+                <option>Nivel 4</option>
+            </select>
+        </section>
 
-    <section>
-        <button type="submit">Buscar Tarea</button>
-    </section>
+        <section>
+            <button type="submit">Buscar Tarea</button>
+        </section>
 
 
-    <footer>
-        <p>&copy; 2024 Asiste Tarea Educación Especial</p>
-    </footer>
-</div>
-    <!-- Submit Button -->
-   
-</form>
-</body>
+        <footer>
+            <p>&copy; 2024 Asiste Tarea Educación Especial</p>
+        </footer>
+    </div>
+        <!-- Submit Button -->
+
+    </form>
+    </body>
 </html>

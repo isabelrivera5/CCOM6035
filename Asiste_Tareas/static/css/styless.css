@@ -1,4 +1,4 @@
-
+<!-- TODO Fix why it doesnt show up when running Flask -->
 /* Estilos globales */
 body {
     display: flex;
@@ -6,8 +6,8 @@ body {
     align-items: center;
     height: 100vh; /* Altura total de la ventana */
     margin: 0;
-    background-image: url('public/fondo.png');
-    background-color:transparent; 
+    background-image: url("{{ url_for('static', filename='images/fondo.png') }}");
+    background-color:transparent;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -16,20 +16,12 @@ body {
     padding: 0;
  }
 
-
-
-/* Estilo del formulario */
-
-
 /* Estilo del título */
 h3 {
     text-align: center; /* Centrar el título */
     margin-bottom: 20px;
     color: #1b1b1d; /* Violeta */
 }
-
-
-
 
 .container {
     width: 50%;
@@ -44,21 +36,18 @@ h3 {
     height: 100vh;
     top: 50px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Sombra elegante */
-
 }
-
-
-
-
 
 h1, h2 {
     color: #5a4e96; /* Violeta */
 }
+
 label {
     display: block;
     margin: 10px 0 5px;
     font-weight: bold;
 }
+
 select, input[type="file"], button {
     width: 100%;
     padding: 10px;
@@ -66,6 +55,7 @@ select, input[type="file"], button {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 button {
     background-color: #68a063; /* Verde */
     color: white;
@@ -78,25 +68,23 @@ button {
     border-radius: 8px; /* Bordes redondeados */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     transition: background-color 0.3s ease, transform 0.2s ease; /* Suavidad en las transiciones */
-
-
 }
+
 button:hover {
     background-color: #3c6139; /* Verde más oscuro */
-    transform: translateY(-2px); /* Efecto de levantamiento */}
- 
+    transform: translateY(-2px); /* Efecto de levantamiento */
+}
+
 button:active {
     transform: translateY(0); /* Regresa al lugar al hacer clic */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce la sombra al presionar */
-  }
-
+}
 
 footer {
     margin-top: 20px;
     font-size: 0.9em;
     color: #777;
 }
-
 
 header {
     background-color: transparent; /* Verde */
@@ -113,35 +101,39 @@ header {
     max-width: 600px;
     margin: auto;
 }
+
 .form-group {
     margin-bottom: 15px;
 }
+
 label {
     display: block;
     margin-bottom: 5px;
 }
+
 input, select {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 .hidden {
     display: none;
 }
+
 .action-buttons {
     margin-top: 15px;
     display: flex;
     justify-content: space-between;
 }
- 
 
 .search-container {
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  
+
   #searchButton {
     padding: 10px 16px;
     background-color: #68a063; /* Verde moderno */
@@ -154,16 +146,16 @@ input, select {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, background-color 0.3s ease;
   }
-  
+
   #searchButton:hover {
     background-color: #45a049; /* Verde más oscuro */
     transform: translateY(-2px); /* Efecto de levantamiento */
   }
-  
+
   #searchButton:active {
     transform: translateY(0); /* Regresa al lugar al hacer clic */
   }
-  
+
   #searchButton:hover {
     background-color: #0056b3;
   }
