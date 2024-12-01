@@ -18,10 +18,25 @@
             showSection('login-register');
         }
 
-
-
     </script>
 </head>
+<style>
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura total de la ventana */
+    margin: 0;
+    background-image: url("{{ url_for('static', filename='images/fondo.png') }}");
+    background-color:transparent;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 120vh;
+    font-family: Arial, sans-serif;
+    padding: 0;
+ }
+</style>
 <body>
 
 <header>
@@ -39,43 +54,46 @@
 <!-- Login Section -->
 <section id="login" class="form-section section hidden">
     <h2>Ingresar</h2>
-    <div class="form-group">
-        <label for="usuario">Usuario</label>
-        <input type="text" id="usuario" required>
-    </div>
-    <div class="form-group">
-        <label for="contraseña">Contraseña</label>
-        <input type="password" id="contraseña" required>
-    </div>
+        <form action="/login" method="POST">
+            <div class="input-email-form">
+                <label for="email">Email</label>
+                <input type="text" name="input_email" required>
+            </div>
+            <div class="input-password-form">
+                <label for="contraseña">Contraseña</label>
+                <input type="text" name="input_password" required>
+            </div>
+            <div>
+                <button type="submit">Ingresar</button>
+            </div>
+        </form>
     <div class="action-buttons">
         <button onclick="showSection('forgot-user')">Olvidó Usuario</button>
         <button onclick="showSection('forgot-password')">Olvidó Contraseña</button>
     </div>
-    <button onclick=window.location="{{url_for('principal')}}">Ingresar</button>
- </section>
+</section>
 
 <!-- Register Section -->
 <section id="register" class="form-section section hidden">
     <h2>Registro</h2>
-    <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" required>
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" required>
-    </div>
-    <div class="form-group">
-        <label for="reg-password">Contraseña</label>
-        <input type="password" id="reg-password" required>
-    </div>
-    <button onclick="registerUser();showSection('login')">Registrar</button>
- 
-</section>
-
-
-
-
+        <form action="/register" method="POST">
+            <div class="input-user-form">
+                <label for="usuario">Usuario</label>
+                <input type="text" name="input_user" required>
+            </div>
+            <div class="input-email-form">
+                <label for="usuario">Email</label>
+                <input type="text" name="input_email" required>
+            </div>
+            <div class="input-password-form">
+                <label for="contraseña">Contraseña</label>
+                <input type="text" name="input_password" required>
+            </div>
+            <div>
+                <button type="submit">Ingresar</button>
+            </div>
+        </form>
+ </section>
 <footer>
     <p>&copy; 2024 Asiste Tarea Educación Especial</p>
 </footer>

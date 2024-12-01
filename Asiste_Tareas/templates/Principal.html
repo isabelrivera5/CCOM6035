@@ -7,6 +7,23 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styless.css') }}">
         <title>Asistente de la tarea</title>
     </head>
+    <style>
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura total de la ventana */
+    margin: 0;
+    background-image: url("{{ url_for('static', filename='images/fondo.png') }}");
+    background-color:transparent;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 120vh;
+    font-family: Arial, sans-serif;
+    padding: 0;
+ }
+</style>
     <body>
         <div class="container">
             <!-- Principa Section -->
