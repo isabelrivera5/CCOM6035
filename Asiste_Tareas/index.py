@@ -1,15 +1,33 @@
 # Imports
 # 3rd Party
-from flask import Flask, render_template, redirect, url_for, request
-
+from flask import Flask, render_template, redirect, url_for, request, session
+from authlib.integrations.flask_client import OAuth
+import os
 # Library
-from AWS_services.Lambda.query_files import query_files
+#from AWS_services.Lambda.query_files import query_files
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)  # Use a secure random key in production
+oauth = OAuth(app)
+oauth.init_app(app)
+
+
+oauth.register(
+  name='oidc',
+  authority='https://cognito-idp.us-east-1.amazonaws.com/us-east-1_2xD8x1SQF',
+  client_id='1tbjqsnjuso91ot481uabf78va',
+  client_secret='<client secret>',
+  server_metadata_url='https://cognito-idp.us-east-1.amazonaws.com/us-east-1_2xD8x1SQF/.well-known/openid-configuration',
+  client_kwargs={'scope': 'email openid phone'}
+)
 
 @app.route("/")
-def home():
-    return render_template('Login.html')
+def index():
+    user = session.get('user')
+    if user:
+        return render_template('Principal.html')
+    else:
+        return render_template('Login.html')
 
 @app.route("/buscar")
 def buscar():
@@ -21,28 +39,35 @@ def agregar():
 
 @app.route("/principal")
 def principal():
-    return render_template('Principal.html')
+        return  render_template('Principal.html')
 
-@app.route("/login", methods=['POST'])
+
+@app.route('/login')
 def login():
-    # Get data from the form
-    email = request.form.get('input_email')
-    password = request.form.get('input_password')
+    # Alternate option to redirect to /authorize
+     redirect_uri = url_for('authorize', _external=True)
+    # Add `ui_locales=es` to the redirect URL to specify Spanish
+     authorization_url = oauth.oidc.authorize_redirect(redirect_uri, ui_locales='es')
+     return oauth.oidc.authorize_redirect('https://d84l1y8p4kdic.cloudfront.net', ui_locales='es')
 
-    # TODO Manage the Call for Login Validation to AWS Cognito here
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('index'))
 
-    # Call a AWS Cognito and Pass Params
-    result = None
+@app.route('/authorize')
+def authorize():
+    token = oauth.oidc.authorize_access_token()
+    user = token['userinfo']
+    session['user'] = user
+    return redirect(url_for('index'))
 
-    # Return a response (could be a new template or a message)
-    return f"Form submitted! Processed input: {result}"
+if __name__ == '__main__':
+    app.run(debug=True)
 
-@app.route("/register", methods=['POST'])
+@app.route("/register")
 def register():
-    # Get data from the form
-    password = request.form.get('input_user')
-    email = request.form.get('input_email')
-    password = request.form.get('input_password')
+   
 
     # TODO Manage the Call for Login Validation to AWS Cognito here
 
@@ -50,7 +75,7 @@ def register():
     result = None
 
     # Return a response (could be a new template or a message)
-    return f"Form submitted! Processed input: {result}"
+    return oauth.oidc.authorize_redirect('https://us-east-11njkdk1rr.auth.us-east-1.amazoncognito.com/signup?client_id=6vtiaq5jkuv3olp52m7v58sfr2&nonce=nh4mVYmSv0737q4AiFTz&redirect_uri=https%3A%2F%2Fd84l1y8p4kdic.cloudfront.net&response_type=code&scope=phone+openid+email&state=NJYIlHk6lKpt5wkm6mf3u6G0fyiNku')
 
 @app.route("/account_recovery")
 def account_recovery():
@@ -78,8 +103,8 @@ def search_results():
     sql_string = 'WIP'
 
     # TODO Call underlying function
-    result = query_files(sql_string)
-
+   # result = query_files(sql_string)
+    result = None
     # TODO Manipulate Result and pass to the Search_Results_HTML
 
     # TODO Return the Template to Render and Parameters for Dynamic HTML
@@ -112,4 +137,5 @@ def add_homework():
     return f"Form submitted! Processed input: {result}"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
+    app.run(debug=True, host='localhost', port=5001)
