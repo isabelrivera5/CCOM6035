@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asistente de la tarea</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styless.css') }}">
+        <link rel="stylesheet" href="C:\Users\UPRH\Documents\CCOM6035\Asiste_Tareas\static\css\styless.css">
  
 </head>
 <style>
@@ -31,58 +31,292 @@
         <h3>Seleccione la descripción de la tarea que desea agregar al banco de datos:</h3>
     </header>
     <form action="/add_homework" method="POST">
-     <!-- Subject Selection -->
-    <section>
-        <label for="materia">Materia</label>
-        <select name="materia">
-            <option>Matemáticas</option>
-            <option>Ciencias</option>
-            <option>Historia</option>
-            <option>Educación Física</option>
-            <option>Música</option>
-        </select>
-    </section>
+	
+	
 
-    <!-- Grade Selection -->
-    <section>
-        <label for="grado">Grado</label>
-        <select name="grado">
-            <option>Kindergarten</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-    </section>
 
-    <!-- Skill Level -->
-    <section>
-        <label for="destreza">Destreza (Indicador)</label>
-        <select name="destreza">
-            <option>Indicador 1</option>
-            <option>Indicador 2</option>
-            <option>Indicador 3</option>
-            <option>Indicador 4</option>
-        </select>
-    </section>
+<!-- Primer menú: Materia -->
+    <label for="menu1">Seleccione la materia:</label>
+    <select id="menu1">
+        <option value="">--Seleccionar Materia--</option>
+        <option value="espanol">Español</option>
+        <option value="ingles">Inglés</option>
+        <option value="matematicas">Matemáticas</option>
+    </select>
 
-    <!-- Student Level -->
-    <section>
-        <label for="nivel">Nivel del Estudiante</label>
-        <select name="nivel">
-            <option>Nivel 1</option>
-            <option>Nivel 2</option>
-            <option>Nivel 3</option>
-            <option>Nivel 4</option>
-        </select>
-    </section>
+    <!-- Segundo menú: Grado -->
+    <label for="menu2">Seleccione el grado:</label>
+    <select id="menu2">
+        <option value="">--Seleccionar Grado--</option>
+    </select>
+
+    <!-- Tercer menú: Destreza -->
+    <label for="menu3">Seleccione la destreza:</label>
+    <select id="menu3">
+        <option value="">--Seleccionar Destreza--</option>
+    </select>
+
+    <!-- Cuarto menú: Nivel -->
+    <label for="menu4">Seleccione el nivel:</label>
+    <select id="menu4">
+        <option value="">--Seleccionar Nivel--</option>
+        <option value="1">Nivel 1</option>
+        <option value="2">Nivel 2</option>
+        <option value="3">Nivel 3</option>
+        <option value="4">Nivel 4</option>
+    </select>
+
+    <script>
+        // Opciones para el segundo menú (Grado)
+        const grados = {
+            espanol: ["Kindergarten", "Primero", "Segundo"],
+            ingles: ["Kindergarten", "Primero", "Segundo"],
+            matematicas: ["Kindergarten", "Primero", "Segundo"]
+        };
+
+        // Opciones para el tercer menú (Destrezas)
+        const destrezas = {
+            espanol: {
+                Kindergarten: [ "K.AO.1 Participa en grupos variados en los que aporta y colabora de diferentes formas, intercambia ideas, desarrolla nueva comprensión y resuelve problemas hacia una meta en común.",
+							"K.AO.1.1 Participa en conversaciones sobre temas y textos relacionados al grado en grupos grandes y pequeños." , 
+							"K.AO.1.1a Comienza a responder a las reglas implícitas de una conversación. Escucha a otros, espera su turno y sigue el tema." , 
+							"K.AO.1.1b Participa en grupos pequeños o grandes para buscar información y dar su opinión sobre el tema." ,  
+							"K.AO.2 Integra y evalúa la información presentada en diversos medios y formatos; utiliza gráficas y recursos tecnológicos para enriquecer la presentación." , 
+							"K.AO.2.1Confirma la comprensión de los textos leídos en voz alta o de información presentada oralmente mediante diálogo, preguntas y respuestas." ,  
+							"K.AO.3 Evalúa la actitud del hablante, el razonamiento, el uso de evidencia y retórica." , 
+							"K.AO.3.1 Formula y responde a preguntas para solicitar ayuda sobre un tema, buscar información o clarificar qué entendió." ,  
+							"K.AO.4 Demuestra aprendizaje y conocimiento del valor de la expresión al considerar la ética." , 
+							"K.AO.4.1 Responde a preguntas e instrucciones de manera apropiada y respetuosa." ,  
+							"K.AO.5 Presenta información, hallazgos y evidencia para que el receptor pueda seguir la línea de razonamiento, la organización, el desarrollo y el estilo apropiado para la tarea, el propósito y la audiencia." , 
+							"K.AO.5.1 Con apoyo del maestro, utiliza palabras, oraciones simples y detalles para describir personas, lugares, cosas y eventos conocidos." ,  
+							"K.AO.6 Utiliza efectivamente los medios, los recursos visuales y las destrezas tecnológicas para crear y mejorar las presentaciones." , 
+							"K.AO.6.1 Realiza dibujos que sirven de punto de partida para sus narraciones y su escritura." , 
+							"K.AO.7 Adapta el lenguaje a diferentes contextos, realiza tareas que fomentan la comunicación oral y utiliza medios informativos para demostrar dominio del español formal e informal." , 
+							"K.AO.7.1 Expresa, en voz alta y oraciones completas, pensamientos, ideas y sentimientos." , 
+							 "K.AO.7.1a Comienza a modular la voz, las frases y la entonación de forma apropiada, según el ambiente y la situación social." ,  
+							"K.AO.8 Utiliza las expresiones no verbales para enfatizar el discurso oral de acuerdo con el contexto y la audiencia."
+ ],
+                Primero: ["1.AO.1 Participa en grupos variados en los que aporta y colabora de diferentes formas, intercambia ideas, desarrolla nueva comprensión y resuelve problemas hacia una meta en común.", 
+							"1.AO.1.1 Participa en conversaciones sobre temas y textos relacionados al grado.",
+							"1.AO.1.1a Sigue las reglas implícitas de una conversación. Escucha a otros atentamente, espera su turno y hace aportaciones vinculadas al tema.",
+							"1.AO.1.1b  Participa en grupos, cuestiona información y ofrece su opinión.",
+							"1.AO.1.1c Expone sus ideas u opiniones sobre una conversación entre sus compañeros y maestro.", 
+							"1.AO.2 Integra y evalúa la información presentada en diversos medios y formatos; utiliza gráficas y recursos tecnológicos para enriquecer la presentación.",
+							"1.AO.2.1 Formula y responde a preguntas sobre detalles claves de textos leídos en voz alta o información presentada oralmente. ",
+							"1.AO.3 Evalúa la actitud del hablante, el razonamiento, el uso de evidencia y retórica.",
+							"1.AO.3.1Formula preguntas y responde a comentarios de otros para buscar información o clarificar qué entendió.",
+							"1.AO.3.1a Aporta información, mediante el diálogo, en torno al tema o asunto de interés.", 
+							"1.AO.4 Demuestra aprendizaje y conocimiento del valor de la expresión al considerar la ética, los valores y la virtud humana."],
+				Segundo: ["2.LLI.4 Interpreta palabras y frases utilizadas en el texto; aplica el conocimiento sobre el origen de las palabras (etimología), sus derivados y el lenguaje figurado para determinar significados técnicos, connotativos y denotativos. Evalúa cómo la selección de un vocabulario específico, la sintaxis, el tono y la voz dan forma al significado para sustentar el propósito del texto y del autor.", 
+							"2.LLI.4.1Describe cómo las características de los textos literarios e informativos influyen en el significado de estos.", 
+							"2.LLI.4.1a Utiliza el contexto para confirmar y autocorregir el reconocimiento y la comprensión de las palabras; relee, de ser necesario.", 
+							"2.LLI.5 Analiza cómo estructuras y patrones específicos del texto dan secuencia a las ideas o afectan el tono, mientras considera las relaciones entre las partes del texto.",
+							"2.LLI.5.1 Identifica la estructura general y las características de los textos literarios. Conoce y utiliza varias características del texto informativo para encontrar datos claves o información en el texto.", 
+							"2.LLI.6 Reconoce e interpreta cómo los autores utilizan el lenguaje literario, las estrategias narrativas, el estilo del discurso, las técnicas persuasivas y la propaganda para lograr su propósito o presentar su punto de vista y evocar una respuesta emocional.", 
+							"2.LLI.6.1 Reconoce la diferencia entre el punto de vista de los personajes. Identifica el propósito principal del texto, incluido lo que el autor quiere responder, explicar o describir; dramatiza historias.", 
+							"2.LLI.7 Integra y evalúa información, incluso visual y cuantitativa, presentada en diversos medios y formatos, para exponer ideas, resolver conflictos y desarrollar una interpretación que va más allá de la que está explícitamente en el texto.", 
+							"2.LLI.7.1 Utiliza ilustraciones y palabras en historias impresas o digitales para demostrar comprensión del texto.", 
+							"2.LLI.7.1a Demuestra conocimiento sobre la organización y las características básicas de los textos literarios o informativos. 2.LLI.8 Delinea, evalúa y critica el argumento y las afirmaciones específicas de un texto, incluida la validez del razonamiento, así como la exactitud, la relevancia y la suficiencia de la información.", 
+							"2.LLI.8.1 Identifica hechos o detalles del texto que desarrollan o apoyan las ideas o el razonamiento del autor."]
+				},
+				
+				
+				
+            ingles: {
+                Kindergarten: ["K.LS.1.1 With guidance and support, listen to and interact with peers and teachers during read-alouds, social interactions, group activities, and informal oral presentations. ",
+							"K.LS.1.1a Follow basic instructions and ask and answer routine questions appropriate to the topic. ",
+							"K.LS.1.1b Listen and respond to simple commands and 2-step instructions and directions.",  
+							"K.LS.1.1c Offer and respond to greetings/farewells using appropriate courtesy expressions.",  
+							"K.LS.1.1d Repeat and respond to chants, poems, songs, and rhymes using phrases, physical movement, etc. ",
+							"K.LS.1.1e Listen and respond to simple 5W and 1H questions. ",
+							"K.LS.2 Contribute to discussions on a variety of social, academic, college, and career topics in diverse contexts and with different audiences. ",
+							"K.LS.2.1 With guidance and support, engage in collaborative conversations and relate personal experience or story information by asking and answering simple yes/no, 5W, and 1H questions using gestures, words, and simple ",
+							"K.LS.3 Evaluate information and determine appropriate responses to answe phrases. r questions effectively. ",
+							"K.LS.3.1 Use common verbal and nonverbal gestures, single words, and simple phrases when interacting with others, retelling texts, and recounting experiences",
+							"K.FS.1.1 Demonstrate understanding of the organization and basic features of print.", 
+							"K.FS.1.1a Follow words from left to right, top to bottom, and page by page. ",
+							"K.FS.1.1b Recognize that spoken words are represented in written language by specific sequences of letters. ",
+							"K.FS.1.1c Recognize that the alphabet consists of consonants and vowels. ",
+							"K.FS.1.1d Understand that words are separated by spaces in print. ",
+							"K.FS.1.1e Recognize and name all upper- and lowercase letters of the alphabet. ",
+							"K.FS.1.1f Recognize that print conveys specific meaning and that pictures may support meaning. ",
+							"K.FS.2 Phonological awareness (rhyming, blending, segmentation, deletion, isolation, substitution) ",
+							"K.FS.2.1 Demonstrate understanding of spoken words, syllables, and sounds (phonemes).", 
+							"K.FS.2.1a Recognize, generate, and produce rhyming words, including nonsense words.", 
+							"K.FS.2.1b Identify syllables through actions (e.g., clapping). ",
+							"K.FS.2.1c Manipulate sounds and words in shared, guided, and independent activities, such as singing, chanting, or participating in finger plays."],
+				
+				
+				Primero: ["1.LS.1 Comprehend and analyze information from a variety of listening activities to ask and answer questions on social, academic, college, and career topics. ",
+							"1.LS.1.1 Listen to and interact with peers during social interactions; read‐alouds; and class, group, and partner discussions. ",
+							"1.LS.1.1a Ask and answer questions appropriate to the topic and offer basic opinions in conversations using learned phrases and open responses (e.g., I like . . . ). ",
+							"1.LS.1.1b Use gestures and expressions to demonstrate engagement and understanding in a socially appropriate manner. ",
+							"1.LS.1.1c Listen and respond to simple commands and instructions or directions with 3 or more steps. ",
+							"1.LS.1.1d Repeat and respond to chants, poems, songs, and rhymes using phrases, physical movements, etc. ",
+							"1.LS.1.1e Recognize and respond to greetings/farewells and courtesy expressions in routine and familiar settings. ",
+							"1.LS.1.1f Listen and respond to simple 5W and 1H questions. ",
+							"1.LS.2 Contribute to discussions on a variety of social, academic, college, and career topics in diverse contexts and with different audiences. ",
+							"1.LS.2.1 Participate in class, group, and partner discussions by listening attentively, following turn-taking rules, and asking and answering questions about stories and personal experience with increasingly elaborated responses, transitioning from one- or two-word responses to phrases and simple sentences. ",
+							"1.LS.2.1a Respond orally to closed- and open-ended questions. ",
+							"1.LS.3 Evaluate information and determine appropriate responses to answer questions effectively. ",
+							"1.LS.3.1 Exchange common social greetings, retell texts, and recount experiences using complete sentences. ",
+							"1.LS.3.1a Use words, phrases, and short sentences to express ideas for a variety of purposes (e.g., to communicate needs and desires, express feelings). ",
+							"1.LS.3.1b Expand sentences to provide details (e.g., Who? What? When?) about a familiar or new activity or process. ",
+							"1.LS.4 Contribute to social, academic, college, and career conversations using accurate and appropriate language. ",
+							"1.LS.4.1 Respond orally to conversations, read-alouds, texts, and oral presentations using a growing number of general, academic, and content-specific words and relying less on physical actions or other means of nonverbal communication. ",
+							"1.LS.5 Provide, justify, and defend opinions or positions in speech. ",
+							"1.LS.5.1 With guidance and support, express opinions using an expanded set of learned phrases and recalling textual evidence or relevant background knowledge. ",
+							"1.LS.5.1a Share and elaborate on statements, opinions, or arguments using language models or sentence starters (prompts). ",
+							"1.LS.6 Adjust language choices according to the task, context, purpose, and audience. ", 
+							"1.LS.6.1 Describe personal experiences using new vocabulary and details about familiar topics appropriate to the situation. "],
+												
+			
+                Segundo: ["2.LS.1.1 Listen to and interact with peers during social interactions; read-alouds (fiction and nonfiction texts); oral presentations; and class, group, and partner discussions.", 
+							"2.LS.1.1a Listen and respond to simple 5W and 1H questions. ", 
+							"2.LS.1.1b Ask and answer questions appropriate to the topic and offer opinions in conversations using learned phrases and open responses. ", 
+							"2.LS.1.1c Use gestures, expressions, and simple words/phrases to demonstrate engagement and understanding in a socially appropriate manner. ", 
+							"2.LS.1.1d Listen and respond to simple and increasingly complex instructions, commands, and directions. ", 
+							"2.LS.1.1e Offer and respond to greetings/farewells using appropriate courtesy expressions.", 
+							"2.LS.1.1f Repeat and respond to chants, poems, songs, and rhymes using phrases, physical movements, etc. ", 
+							"2.LS.2 Contribute to discussions on a variety of social, academic, college, and career topics in diverse contexts and with different audiences. ", 
+							"2.LS.2.1 Participate in class, group, and partner discussions by listening attentively, following turn-taking rules, and asking and answering questions using complete sentences and demonstrating confidence about personal experience and texts. ", 
+							"2.LS.2.1a Respond orally to closed- and open-ended questions. ", 
+							"2.LS.3 Evaluate information and determine appropriate responses to answer questions effectively. ", 
+							"2.LS.3.1 Exchange common social and more formal greetings, retell texts, and recount experiences using increasingly detailed complete sentences. ", 
+							"2.LS.3.1a Use words, phrases, and expanded sentences to express ideas for a variety of purposes (e.g., to communicate needs and desires). ", 
+							"2.LS.3.1b Expand sentences to provide details (e.g., time, manner, place, cause) in shared language activities guided by the teacher and sometimes independently. ", 
+							"2.LS.4 Contribute to social, academic, college, and career conversations using accurate and appropriate language. ", 
+							"2.LS.4.1 Retell conversations and summarize fictional and informational texts. Respond to stories, read-alouds, and presentations orally using a growing number of general, academic, and content-specific words. ", 
+							"2.LS.5 Provide, justify, and defend opinions or positions in speech. "]
+				},
+				
+				
+            matematicas: {
+                Kindergarten: ["K.N.1 Reconoce la relación entre los números cardinales y las cantidades que estos representan desde 0 hasta 100.", 
+							"K.N.1.1 Cuenta (o cuenta de memoria) números cardinales de uno en uno y de 10 en 10 hasta 100.", 
+							"K.N.1.2 Escribe números cardinales en forma ascendente y descendente, a partir de un número dado. ",
+							"K.N.2 Compara y ordena números cardinales hasta dos dígitos.", 
+							"K.N.2.1 Compara números cardinales hasta dos dígitos (es mayor, es menor o es igual).",
+							"K.N.2.2 Ordena, de forma ascendente y descendente, números cardinales hasta dos dígitos. ",
+							"K.N.2.3 Nombra y utiliza los números ordinales (al menos hasta el sexto) para resolver problemas.", 
+							"K.N.3 Construye el significado de la suma con totales de 10 y la resta por medio de modelos concretos.", 
+							"K.N.3.1 Representa los conceptos de suma y resta de números cardinales hasta 10 para resolver problemas.", 
+							"K.N.3.2 Utiliza el algoritmo de suma con dos sumandos de números cardinales menores o iguales a 10. ",
+							"K.N.3.3 Realiza suma y resta aplicando el cálculo mental.", 
+							"K.N.4 Identifica y representa fracciones. ",
+							"K.N.4.1 Identifica, nombra y representa la fracción unitaria 1 2 .",
+							"K.A.5 Interpreta y amplía patrones repetitivos y crecientes. ",
+							"K.A.5.1 Identifica y amplía un patrón con materiales concretos, semiconcretos, movimientos y/o sonidos en situaciones de la vida diaria.", 
+							"K.A.6 Comprende el concepto de igualdad. ",
+							"K.A.6.1 Identifica y utiliza el signo de igualdad (=) para llegar a conclusiones. Geometría El estudiante es capaz de identificar formas y dimensiones geométricas, y de utilizar el conocimiento espacial a fin de analizar sus estructuras, características, propiedades y relaciones para reconocer y descubrir el entorno físico.", 
+							"K.G.7 Reconoce, identifica y nombra formas geométricas en su entorno. ",
+							"K.G.7.1 Identifica y describe figuras geométricas bidimensionales (triángulo, cuadrado, rectángulo y círculo) y tridimensionales (esfera, cubo, cilindro, cono y pirámide) en su entorno sin importar la posición.", 
+							"K.G.7.2 Clasifica figuras geométricas bidimensionales y tridimensionales por su forma y tamaño."],
+				Primero: ["1.N.1 Reconoce la relación entre los números cardinales hasta tres dígitos (0 al 999), las cantidades que estos representan y el valor posicional de sus dígitos.", 
+							"1.N.1.1 Cuenta, lee y escribe números cardinales hasta tres dígitos a partir de un número dado. ",
+							"1.N.1.2 Determina y escribe el número que va antes, entre y después utilizando los números cardinales hasta tres dígitos. ",
+							"1.N.1.3 Nombra y utiliza los números ordinales hasta el décimo para resolver problemas.",
+							"1.N.1.4 Compara y ordena números cardinales hasta tres dígitos basándose en el significado de las centenas, decenas y unidades, y registra el resultado de las comparaciones utilizando los símbolos >, =, <. ",
+							"1.N.2 Aplica el valor posicional de un número cardinal con base 10 hasta la centena. ", 
+							"1.N.2.1 Representa 10 unidades como una decena, 10 decenas como una centena y 10 centenas como un millar. ",
+							"1.N.2.2 Compone y descompone números cardinales de hasta tres dígitos mediante notación desarrollada. ",
+							"1.N.3 Representa y resuelve problemas de suma con totales hasta 999 y de resta con diferencias hasta 0.",
+							"1.N.3.1 Escribe y resuelve ejercicios y problemas de aplicación de suma (hasta tres sumandos) y resta, hasta la centena. ", 
+							"1.N.3.2 Aplica las propiedades (conmutativa, asociativa y el elemento identidad de la suma [0]) para efectuar operaciones de suma. Para sumar 2 + 6 + 4, los dos últimos números se pueden sumar para formar una decena. Por lo tanto, 2 + 6 + 4 = 2 + 10 = 12 (propiedad asociativa de la suma). (El estudiante no tiene que conocer ni usar los nombres formales de estas propiedades). ",
+							"1.N.3.3 Suma números cardinales de hasta tres dígitos y utiliza diversas estrategias: ➢ un número de dos dígitos y un número de un dígito ➢ un número de dos dígitos con un múltiplo de 10 ➢ modelos concretos, dibujos y estrategias basadas en el valor posicional ➢ propiedades de las operaciones y/o la relación que hay entre la suma y la resta ➢ relaciona la estrategia con un método escrito y explica el razonamiento utilizado. ", 
+							"1.N.3.4 Relaciona el conteo con la suma y la resta (Ejemplo: Contar 2 hacia delante para sumar 2). ",
+							"1.N.4 Identifica y representa fracciones. ",
+							"1.N.4.1 Identifica, nombra y representa fracciones unitarias ( 1 2 , 1 4 , entre otras). ",
+							"1.N.4.2 Representa y compara fracciones como parte de un entero o conjunto usando materiales concretos y semiconcretos. ",
+							"1.N.4.3 Reconoce, en forma concreta, que al unir todas las partes fraccionarias en que se divide un entero se vuelve a tener el entero. ",
+							"1.A.5 Reconoce, lee, describe y amplía patrones repetitivos y crecientes. ",
+							"1.A.5.1 Identifica patrones numéricos con números cardinales de hasta tres dígitos. ",
+							"1.A.5.2 Identifica, completa y crea patrones que incluyen: ➢ modelos concretos ➢ figuras geométricas ➢ movimientos ➢ sonidos ➢ números Utiliza patrones para resolver problemas de la vida diaria.",
+							" 1.A.6 Utiliza expresiones y relaciones numéricas para determinar si una ecuación de suma o resta es cierta o falsa. "],
+                Segundo: ["2.N.1 Reconoce la relación entre los números cardinales hasta cuatro dígitos (0 al 9,999), las cantidades que estos representan y el valor posicional de sus dígitos.",
+							"2.N.1.1Cuenta, lee y escribe números cardinales hasta cuatro dígitos a partir de un número dado.",
+							"2.N.1.2 Identifica y representa el número cardinal de cuatro dígitos basándose en el significado de las unidades de millar, centenas, decenas y unidades.",
+							"2.N.1.3 Representa la respuesta de ordenar y comparar mediante: una sucesión o patrón el uso de los signos de comparación <, >, o =",
+							"2.N.1.4 Reconoce e identifica los números pares e impares: Determina si un conjunto de objetos tiene un número de elementos par o impar. Reconoce que la suma de dos números pares es par y la suma de dos números impares es par.",
+							"2.N.1.5 Aplica el valor posicional de un número cardinal hasta cuatro dígitos para representar unidades de millar, centenas, decenas y unidades. Entiende los siguientes casos especiales: Se puede decir que 100 es un grupo de diez decenas, llamado una “centena”. Los números 100, 200, 300, 400, 500, 600, 700, 800, 900 se refieren a una, dos, tres, cuatro, cinco, seis, siete, ocho o nueve centenas (con 0 decenas y 0 unidades).",
+							"2.N.1.6 Compone y descompone números cardinales hasta cuatro dígitos. Utiliza la notación desarrollada para representar números cardinales de hasta cuatro dígitos.",
+							"2.N.1.7 Nombra y utiliza los números ordinales hasta el vigésimo (20) lugar para resolver problemas matemáticos.",
+							"2.N.1.8 El uso de la recta numérica Representa números cardinales como longitudes con los puntos correspondientes a los números 0, 1, 2, …, ubicados a la misma distancia a partir del 0. Representa sumas y diferencias de números cardinales hasta 100. 2.N.2 Aplica el valor posicional de un número cardinal con base 10 hasta la unidad de millar para realizar operaciones.",
+							"2.N.2.1 Suma y resta con números hasta cuatro dígitos utilizando estrategias basadas en el valor posicional, las propiedades de las operaciones y/o la relación entre la suma y la resta: sin reagrupar y reagrupando."]
+            }
+        };
+
+        // Elementos del DOM
+        const menu1 = document.getElementById("menu1");
+        const menu2 = document.getElementById("menu2");
+        const menu3 = document.getElementById("menu3");
+
+        // Actualizar el segundo menú según la materia seleccionada
+        menu1.addEventListener("change", function () {
+            const materiaSeleccionada = menu1.value;
+            menu2.innerHTML = '<option value="">--Seleccionar Grado--</option>';
+            menu3.innerHTML = '<option value="">--Seleccionar Destreza--</option>';
+
+            if (grados[materiaSeleccionada]) {
+                grados[materiaSeleccionada].forEach(grado => {
+                    const opcion = document.createElement("option");
+                    opcion.value = grado;
+                    opcion.textContent = grado;
+                    menu2.appendChild(opcion);
+                });
+            }
+        });
+
+        // Actualizar el tercer menú según el grado y materia seleccionados
+        menu2.addEventListener("change", function () {
+            const materiaSeleccionada = menu1.value;
+            const gradoSeleccionado = menu2.value;
+            menu3.innerHTML = '<option value="">--Seleccionar Destreza--</option>';
+
+            if (destrezas[materiaSeleccionada] && destrezas[materiaSeleccionada][gradoSeleccionado]) {
+                destrezas[materiaSeleccionada][gradoSeleccionado].forEach(destreza => {
+                    const opcion = document.createElement("option");
+                    opcion.value = destreza;
+                    opcion.textContent = destreza;
+                    menu3.appendChild(opcion);
+                });
+            }
+        });
+    </script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Task File Upload -->
     <section>
         <label for="archivo">Archivo de Tarea (PDF o JPG)</label>
         <input type="file" name="archivo" accept=".pdf, .jpg" required>
         <button type="submit">Añadir Tarea</button>
+		<button onclick=window.location="{{url_for('principal')}}">Volver a la página Principal</button>
+
     </section>
         </form>
 
