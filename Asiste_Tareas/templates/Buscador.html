@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <title> Bienvenidos al Portal de Tareas para estudiantes de Educación Especial</title>
-        <link rel="stylesheet" href="C:\Users\UPRH\Documents\CCOM6035\Asiste_Tareas\static\css\styless.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styless.css') }}">
         <title>Asistente de la tarea</title>
 
     </head>
@@ -33,11 +33,9 @@
         </header>
         <form action="/search_results" method="POST">
 
-
-
 <!-- Primer menú: Materia -->
     <label for="menu1">Seleccione la materia:</label>
-    <select id="menu1">
+    <select id="menu1" name="materia">
         <option value="">--Seleccionar Materia--</option>
         <option value="espanol">Español</option>
         <option value="ingles">Inglés</option>
@@ -46,19 +44,19 @@
 
     <!-- Segundo menú: Grado -->
     <label for="menu2">Seleccione el grado:</label>
-    <select id="menu2">
+    <select id="menu2" name="grado">
         <option value="">--Seleccionar Grado--</option>
     </select>
 
     <!-- Tercer menú: Destreza -->
     <label for="menu3">Seleccione la destreza:</label>
-    <select id="menu3">
+    <select id="menu3" name="destreza">
         <option value="">--Seleccionar Destreza--</option>
     </select>
 
     <!-- Cuarto menú: Nivel -->
     <label for="menu4">Seleccione el nivel:</label>
-    <select id="menu4">
+    <select id="menu4" name="nivel">
         <option value="">--Seleccionar Nivel--</option>
         <option value="1">Nivel 1</option>
         <option value="2">Nivel 2</option>

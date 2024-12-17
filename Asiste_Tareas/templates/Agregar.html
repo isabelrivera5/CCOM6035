@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asistente de la tarea</title>
-        <link rel="stylesheet" href="C:\Users\UPRH\Documents\CCOM6035\Asiste_Tareas\static\css\styless.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styless.css') }}">
  
 </head>
 <style>
@@ -30,14 +30,11 @@
         <h2>Portal para agregar tareas</h2>
         <h3>Seleccione la descripción de la tarea que desea agregar al banco de datos:</h3>
     </header>
-    <form action="/add_homework" method="POST">
-	
-	
-
+    <form action="/upload" method="POST" enctype="multipart/form-data">
 
 <!-- Primer menú: Materia -->
     <label for="menu1">Seleccione la materia:</label>
-    <select id="menu1">
+    <select id="menu1" name="materia" required>
         <option value="">--Seleccionar Materia--</option>
         <option value="espanol">Español</option>
         <option value="ingles">Inglés</option>
@@ -46,19 +43,19 @@
 
     <!-- Segundo menú: Grado -->
     <label for="menu2">Seleccione el grado:</label>
-    <select id="menu2">
+    <select id="menu2" name="grado" required>
         <option value="">--Seleccionar Grado--</option>
     </select>
 
     <!-- Tercer menú: Destreza -->
     <label for="menu3">Seleccione la destreza:</label>
-    <select id="menu3">
+    <select id="menu3" name="destreza" required>
         <option value="">--Seleccionar Destreza--</option>
     </select>
 
     <!-- Cuarto menú: Nivel -->
     <label for="menu4">Seleccione el nivel:</label>
-    <select id="menu4">
+    <select id="menu4" name="nivel" required>
         <option value="">--Seleccionar Nivel--</option>
         <option value="1">Nivel 1</option>
         <option value="2">Nivel 2</option>
@@ -283,37 +280,11 @@
             }
         });
     </script>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- Task File Upload -->
     <section>
-        <label for="archivo">Archivo de Tarea (PDF o JPG)</label>
-        <input type="file" name="archivo" accept=".pdf, .jpg" required>
+        <label for="archivo">Archivo de Tarea (PDF)</label>
+        <input type="file" name="file" accept=".pdf" required>
         <button type="submit">Añadir Tarea</button>
 		<button onclick=window.location="{{url_for('principal')}}">Volver a la página Principal</button>
 

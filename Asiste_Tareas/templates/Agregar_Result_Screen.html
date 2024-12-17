@@ -6,6 +6,7 @@
          <title> Bienvenidos al Portal de Tareas para estudiantes de Educación Especial</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styless.css') }}">
         <title>Asistente de la tarea</title>
+
     </head>
     <style>
     body {
@@ -25,21 +26,18 @@
  }
 </style>
     <body>
-        <div class="container">
-            <!-- Principa Section -->
-            <section id="principal" class="form-section section">
-                <h2>Bienvenidos al Portal de Tareas para estudiantes de Educación Especial</h2>
-                <h3>¿Qué desea hacer hoy? </h3>
-                    <!-- Form with a button that triggers the redirect -->
-                <div class="form-group">
-                    <button onclick=window.location="{{url_for('buscar')}}">Buscar Tarea</button>
-                    <button onclick=window.location="{{url_for('agregar')}}">Agregrar Tarea</button>
-                </div>
-            </section>
-            <footer>
-                <p>&copy; 2024 Asiste Tarea Educación Especial</p>
-            </footer>
-        </div>
-
+    <div class="container">
+        <header>
+            <h2> {{ result }}</h2>
+        </header>
+         <form action="/principal">
+              <div>
+                  <button type="submit">Regresar</button>
+              </div>
+          </form>
+        <footer>
+            <p>&copy; 2024 Asiste Tarea Educación Especial</p>
+        </footer>
+    </div>
     </body>
 </html>

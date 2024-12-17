@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asistente de la tarea</title>
-        <link rel="stylesheet" href="C:\Users\UPRH\Documents\CCOM6035\Asiste_Tareas\static\css\styless.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styless.css') }}">
  
 </head>
 <style>
@@ -27,7 +27,7 @@
 <body>
     <header>
         <h1>Resultados de la Búsqueda</h1>
-        <button onclick="window.location.href='/index.html'">Volver al Inicio</button>
+        <button onclick=window.location="{{url_for('principal')}}">Volver a la página Principal</button>
     </header>
 
 
@@ -50,11 +50,7 @@
 
     <script>
         // Datos simulados de resultados (tiene que venir del backend)
-        const resultados = [
-            { nombre: "Tarea 1", url: "pdf/tarea1.pdf" },
-            { nombre: "Tarea 2", url: "pdf/tarea2.pdf" },
-            { nombre: "Tarea 3", url: "pdf/tarea3.pdf" }
-        ];
+        const resultados = {{ resultados | tojson }};
 
         // Elemento contenedor de tareas
         const taskList = document.getElementById("task-list");
@@ -68,7 +64,7 @@
                 <iframe src="${tarea.url}" class="pdf-preview"></iframe>
                 <div class="task-actions">
                     <button onclick="guardarPDF('${tarea.url}')">Guardar PDF</button>
-                    <button onclick="eliminarTarea('${tarea.nombre}')">Eliminar</button>
+                    <!--<button onclick="eliminarTarea('${tarea.nombre}')">Eliminar</button> -->
                 </div>
             `;
             taskList.appendChild(tareaDiv);

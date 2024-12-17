@@ -3,13 +3,24 @@
 from flask import Flask, render_template, redirect, url_for, request, session
 from authlib.integrations.flask_client import OAuth
 import os
+
 # Library
-#from AWS_services.Lambda.query_files import query_files
+from AWS_services.RDS.query_files import query_files
+from AWS_services.RDS.add_file_metadata import add_file_metadata
+from Library.Utilities import allowed_file
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Use a secure random key in production
+
+# FIle Storage
+UPLOAD_FOLDER = 'uploads'  # Specify the folder where files will be stored
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['ALLOWED_EXTENSIONS'] = {'pdf'}  # Specify allowed file types
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limit to 16MB
+
+# AWS Cognito OAuth Config
 oauth = OAuth(app)
 oauth.init_app(app)
+app.secret_key = os.urandom(24)  # Use a secure random key in production
 
 
 oauth.register(
@@ -27,7 +38,8 @@ def index():
     if user:
         return render_template('Principal.html')
     else:
-        return render_template('Login.html')
+        # return render_template('Login.html')
+        return render_template('Principal.html')
 
 @app.route("/buscar")
 def buscar():
@@ -62,9 +74,6 @@ def authorize():
     session['user'] = user
     return redirect(url_for('index'))
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
 @app.route("/register")
 def register():
    
@@ -97,44 +106,63 @@ def search_results():
     for key, value in request.form.items():
         selections[key] = value
 
-    print(selections)
+    # Call underlying function
+    sql_results = query_files(selections)
 
-    # TODO Generate the SQL for Querying the table with these selection parameters
-    sql_string = 'WIP'
+    # Transform Results to pass as Parameters for HTML Generation
+    results = []
 
-    # TODO Call underlying function
-   # result = query_files(sql_string)
-    result = None
-    # TODO Manipulate Result and pass to the Search_Results_HTML
+    for result in sql_results:
+        file_name = os.path.basename(result['file_key'])
+        url_result = url_for('static', filename=f'uploads/{file_name}')
+        results.append({'nombre': file_name, "url": url_result})
 
-    # TODO Return the Template to Render and Parameters for Dynamic HTML
-    return f"Form submitted! Processed input: {result}"
+    # Return the Template to Render and Parameters for Dynamic HTML
+    return render_template('ResultadosBusqueda.html', resultados=results)
 
-@app.route("/add_homework", methods=['POST'])
+@app.route("/upload", methods=['POST'])
 def add_homework():
-    # Extract Parameters to search with
-    selections = {}
+    # TODO Can most likely greatly improve code by simply returning one "render_template at the end" and just storing a string for type of message to display.
+    if request.method == 'POST':
+        # Extract Parameters to search with
+        selections = {}
 
-    # Loop through all form fields (keys)
-    for key, value in request.form.items():
-        selections[key] = value
+        # Loop through all form fields (keys)
+        for key, value in request.form.items():
+            selections[key] = value
 
-    print(selections)
+        file = request.files['file']
 
-    # Get uploaded file
-    file = request.files.get('file')  # Retrieve the uploaded file
+        # If no file is selected
+        if file.filename == '':
+            return render_template('Agregar_Result_Screen.html', result='Archivo no tiene nombre valido.')
 
-    # TODO Validate File such as no bigger than X megabytes and have allowed extensions
+        if file and allowed_file(file.filename, app):
+            # Secure the filename (to avoid malicious filenames)
+            filename = file.filename
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-    # TODO Call underlying function to upload to S3
-    # TODO Returns the Key of where/how it was stored
-    # TODO Add into the RDS Table a new row with the metadata and storage key of the file
-    result = None
+            # TODO Improve error handling here, by putting all this in a generic try - except Clause
+            # Save the file
+            file.save(filepath)
 
-    # TODO Manipulate Result and pass to the Homework Added HTML or something IDK yet
+            user_id = 'WIP'  # TODO ADD IN AWS COGNITO ID FOR WHO IS UPLOADING HERE
 
-    # Redirect back to Main Page
-    return f"Form submitted! Processed input: {result}"
+            # Store Metadata
+            result = add_file_metadata((selections['materia'], selections['grado'], selections['destreza'], selections['nivel'], filepath, user_id))
+
+            if result != 'success':
+                return render_template('Agregar_Result_Screen.html', result=f'Internal Error when adding File metadata to RDS, report to admin.')
+
+            return render_template('Agregar_Result_Screen.html', result=f'Archivo {filename} subido correctamente.')
+
+        return render_template('Agregar_Result_Screen.html', result='Tipo de Archivo subido no permitido.')
+
+    result = 'Method Not Post, not sure how you got here, should not happen please report to admin.'
+
+    # Redirect to Result Screen
+    return render_template('Agregar_Result_Screen.html', result=result)
+
 
 if __name__ == '__main__':
     #app.run(debug=True)

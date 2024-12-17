@@ -7,32 +7,30 @@ from Library.RDS import connect_to_rds
 import pymysql
 
 
-def query_files(sql_query_string: str):
+def add_file_metadata(values):
     # Create Connection
     connection = connect_to_rds(RDS['DB_ENDPOINT'], RDS['DB_PORT'], RDS['DB_USERNAME'], RDS['DB_PASSWORD'], RDS['DB_IDENTIFIER'])
 
+    # Base SQL Query_String
+    query = """INSERT INTO tareas (materia, grado, destreza, nivel, file_key, created_by) VALUES (%s, %s, %s, %s, %s, %s); """
+
     try:
         with connection.cursor() as cursor:
-            # Execute the query with the parameter
-            cursor.execute(sql_query_string)
-
-            # Get all Results
-            result = cursor.fetchall()
-
-            # TODO Once Decided on Results Limit, we can Limit number of results returned with LIMIT N
-
-            return result
+            cursor.execute(query, values)  # Execute the query with the values
+            connection.commit()  # Commit the transaction
 
     except pymysql.MySQLError as e:
         print(f"Error: {e}")
+        return e
 
     finally:
         # Close the database connection
         if connection:
             connection.close()
+            return 'success'
 
 
 if __name__ == "__main__":
-    sql_string = "SELECT * FROM users LIMIT 1"
-    response = query_files(sql_string)
+    _tmp_values = ('matematicas', 'grado 3', 'motor fino', 'nivel 1', '/uploads/some_file.jpeg', 'some_user_id_here')
+    response = add_file_metadata(_tmp_values)
     print(response)
