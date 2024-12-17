@@ -26,6 +26,6 @@ else:
         'DB_PASSWORD': 'HOGaKEkrh1d2WgGO3wzh'
     }
 
-S3: dict[str,str | None] = {
+S3 = {
     'BUCKET_IDENTIFIER': None
 }
