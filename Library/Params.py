@@ -10,7 +10,7 @@ LOCAL: bool = True
 
 # RDS Params
 if not LOCAL:
-    RDS: dict[str, str | None | int]  = {
+    RDS = {
         'DB_IDENTIFIER': 'asiste-tareas',
         'DB_ENDPOINT': os.environ['DB_ENDPOINT'],
         'DB_PORT': int(os.environ['DB_PORT']),
@@ -18,7 +18,7 @@ if not LOCAL:
         'DB_PASSWORD': os.environ['DB_PASSWORD']
     }
 else:
-    RDS: dict[str, str | None | int]  = {
+    RDS = {
         'DB_IDENTIFIER': 'asiste-tareas',
         'DB_ENDPOINT': 'asiste-tareas-prod.c58a0wuwsogu.us-east-1.rds.amazonaws.com',
         'DB_PORT': 3306,
